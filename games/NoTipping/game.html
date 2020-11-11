@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <head>
+        <!-- <base href="http://cims.nyu.edu/drecco2016/"> -->
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
+        <script src="./script.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="css/game.css"/>
+    </head>
+    <body>
+        <div class="container-fluid"> 
+            <h1 class="page-header game-title"> No Tipping Game </h1> 
+
+            <div class="information-container col-sm-3">
+                <div class="information col-sm-10">
+                    <h2 class="information-header"> Game information </h2>
+                    <div class="info-form">
+                        <label for="player-1"> Player 1 Name </label>
+                        <input type="text" class="form-control info-input" id="player-1">
+                    </div>
+
+                     <div class="info-form">
+                        <label for="player-2"> Player 2 Name </label>
+                        <input type="text" class="form-control info-input" id="player-2">
+                    </div>
+
+                     <div class="info-form">
+                        <label for="size-of-board"> Size of Board (m) </label>
+                        <input type="text" class="form-control info-input" id="size-of-board" value="30">
+                    </div>
+
+                     <div class="info-form">
+                        <label for="weight-of-board"> Weight of Board (kg) </label>
+                        <input type="text" class="form-control info-input" id="weight-of-board" value="3">
+                    </div>
+
+                     <div class="info-form">
+                        <label for="number-of-weights"> Number of Weights </label>
+                        <input type="text" class="form-control info-input" id="number-of-weights" value="10">
+                    </div>
+
+                     <div class="col-sm-12 alert alert-danger alert-dismissable" id="error-container">
+                        <a href="#" class="close" aria-label="close">&times;</a>
+                        <p id="error-message"> </p>
+                    </div>
+                    <div class="btn-container col-sm-12">
+                        <button type="button" class="start-game btn btn-primary" onclick="startGame();">Start new game</button>
+                    </div>
+
+                   
+                </div>
+            </div>
+            <div class="game col-sm-9" id='game-container'>
+
+            </div>
+        </div>
+    </body>
+
+    <script>
+        $('.close').on('click', function() {
+            $(this).parent().hide();
+            console.log('worked');
+        });
+
+    </script>
+</html>

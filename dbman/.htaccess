@@ -1,0 +1,5 @@
+<Files ~ "\.(htaccess|php)$">
+Options +Includes
+AddOutputFilter Includes html
+XBitHack on
+</Files>

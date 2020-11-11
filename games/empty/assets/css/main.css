@@ -1,0 +1,927 @@
+#bigTitle {
+    text-align: center;
+    color: #00cee1;
+    padding: 12px 30px 0px 30px;
+}
+
+.title {
+    text-align: center;
+    font-family: "Helvetica", Helvetica, sans-serif;
+    margin-bottom: 20px;
+}
+
+.instr {
+    text-align: left;
+    display: inline-block;
+    font-family: "Helvetica", Helvetica, sans-serif;
+    font-size: 14pt;
+    line-height: 1.65;
+    margin-bottom: 20px;
+    padding: 12px 30px 0px 30px;
+    width: 700px;
+}
+
+.instr ol, li p {
+    font-family: "Helvetica", Helvetica, sans-serif;
+    font-size: 14pt;
+    line-height: 1.65;
+}
+
+.line{
+
+}
+
+#gridWrapper {
+    margin:0 auto;
+    text-align:center;
+    padding: 10px;
+    overflow: scroll;
+    background-color: transparent;
+}
+
+#gameArea {
+    text-align:center;
+    margin-top: 20px;
+}
+
+.vedgeWrapper {
+    display: inline-block;
+    text-align:center;
+    background-color: transparent;
+    width: auto;
+}
+
+.hedgeWrapper {
+    display: inline-block;
+    text-align:center;
+    background-color: transparent;
+    width: auto;
+}
+
+.hedge {
+    display: inline-block;
+    position: relative;
+    float: left;
+    width: 70px;
+    height: 10px;
+    background-color: #262626;
+    border-radius: 3px;
+    -webkit-transition: width 2s ease, height 2s ease;
+    -moz-transition: width 2s ease, height 2s ease;
+    -o-transition: width 2s ease, height 2s ease;
+    transition: width 2s ease, height 2s ease;
+    z-index: 0;
+}
+
+.node {
+    display: inline-block;
+    position: relative;
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background-color: #7f7f7f;
+    -webkit-transition: width 2s ease, height 2s ease;
+    -moz-transition: width 2s ease, height 2s ease;
+    -o-transition: width 2s ease, height 2s ease;
+    transition: width 2s ease, height 2s ease;
+    z-index: 0;
+}
+
+.left {
+    display: inline-block;
+    position: relative;
+    float: left;
+    width: 70px;
+    height: 70px;
+    background-color: transparent;
+    border-radius: 3px;
+    z-index: 0;
+}
+
+.vedge {
+    display: inline-block;
+    position: relative;
+    float: left;
+    left: 0px;
+    width: 10px;
+    height: 70px;
+    background-color: #262626;
+    border-radius: 3px;
+    -webkit-transition: width 2s ease, height 2s ease;
+    -moz-transition: width 2s ease, height 2s ease;
+    -o-transition: width 2s ease, height 2s ease;
+    transition: width 2s ease, height 2s ease;
+    z-index: 0;
+}
+
+body {
+    border-width: 0px;
+    padding: auto;
+    background-color: #f5f8fa !important;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+    opacity: 0
+}
+
+#infoPanel {
+    text-align:center;
+    border: gray solid 1px;
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    padding: 10px;
+    font-family: "Helvetica", Helvetica, sans-serif;
+    font-size: 12pt;
+    line-height: 1.2;
+    width: 700px;
+}
+
+#infoPanel div {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.left:hover{
+    background-color: transparent;
+}
+
+.edge:hover {
+    background-color: #ff2e8a;
+}
+
+.hedge:hover {
+    background-color: #ff2e8a;
+}
+
+.node:hover {
+    background-color: #4878ff;
+}
+
+.node.animate {
+    animation-name: probePlaced;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.edge.prepare {
+    background-color: #00cee1;
+}
+.node.prepare {
+    background-color: #00cee1;
+}
+
+.edge.bad{
+    background-color: #880000;
+}
+
+.node.bad{
+    background-color: #880000;
+}
+
+
+.hedge.animate {
+    animation-name: edgeSelected;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.vedge.animate {
+    animation-name: vedgeSelected;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.hedge.final {
+    animation-name: hedgeFinal;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.vedge.final {
+    animation-name: vedgeFinal;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.edge.reveal {
+    background-color: #12bb2b;
+}
+
+.node.reveal{
+    background-color: #12bb2b;
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+/*
+ * Animation for a horizontal edge that has been clicked
+ */
+@keyframes edgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-moz-keyframes edgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-webkit-keyframes edgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-o-keyframes edgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-ms-keyframes edgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+/*
+ * Animation for a vertical edge that has been clicked
+ */
+@keyframes vedgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-moz-keyframes vedgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-webkit-keyframes vedgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-o-keyframes vedgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+@-ms-keyframes vedgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #00dab2;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #00dab2;
+    }
+}
+
+/*
+ * Animation for final guesses
+ */
+
+@keyframes hedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+@-moz-keyframes hedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+@-webkit-keyframes hedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+@-o-keyframes hedgeSelected {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #12bb2b;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #12bb2b;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #12bb2b;
+    }
+}
+
+@-ms-keyframes hedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 70px;
+        height: 20px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+/*
+ * Animation for a vertical edge final selection
+ */
+@keyframes vedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+@-moz-keyframes vedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+@-webkit-keyframes vedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+@-o-keyframes vedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+@-ms-keyframes vedgeFinal {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #273df8;
+    }
+
+    33% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    66% {
+        width: 20px;
+        height: 70px;
+        background: #e161c8;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #e161c8;
+    }
+}
+
+
+
+
+/*
+ * Animation for a probe that has been clicked
+ */
+@keyframes probePlaced {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #00ffe5;
+        border-radius: 50%;
+    }
+
+    33% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    66% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+}
+
+@-moz-keyframes probePlaced {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #00ffe5;
+        border-radius: 50%;
+    }
+
+    33% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    66% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+}
+
+@-webkit-keyframes probePlaced {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #00ffe5;
+        border-radius: 50%;
+    }
+
+    33% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    66% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+}
+
+@-o-keyframes probePlaced {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #00ffe5;
+        border-radius: 50%;
+    }
+
+    33% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    66% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+}
+
+@-ms-keyframes probePlaced {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        background: #00ffe5;
+        border-radius: 50%;
+    }
+
+    33% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    66% {
+        width: 20px;
+        height: 20px;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background: #ffd630;
+        border-radius: 50%;
+    }
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/semantic.min.css">
+    <script src="assets/css/semantic.min.js" type="text/javascript" ></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+</head>
+
+<body>
+
+<div id="gameArea">
+    <div class =title>
+        <h2>Dig That</h2>
+        <button class="large ui blue basic button" v-on:click="changeInstr()">Hide/Reveal Instructions</button>
+    </div>
+
+    <div>
+        <div class="instr"v-if="showInstr()">
+            <strong>Overview:</strong> <br/>
+            <p> Dig That is a two-player game between a Badguy and a Detector.
+                The Badguy builds an explosive tunnel under the city and it is the role of the Detector to detect the tunnel.
+                Two people can play, or one person can play Detector and the computer will be the Badguy.</p>
+            <strong>Phases:</strong> <br/>
+            <ol>
+                <li> The Detector looks away from the screen while the Badguy builds a tunnel.
+                    Maximum length of the tunnel is randomly generated,
+                    and will be specified before building begins.
+                    The tunnel needs to be a simple path with a start and end node on the top and bottom rows respectively.
+                    In order to construct the tunnel, the Badguy needs to click on the edges he wants to be a part of his tunnel.
+                    When he is content with the tunnel, he clicks on the "I finished my tunnel" button in the info panel and the tunnel will disappear. </li>
+                <li> Now the Detector can begin detecting by placing probes on any number of intersections or edges. When the Detector is done,
+                    click the "Done placing first round of probes" button.
+                    If a given probe is on top of a part of the tunnel,
+                    the probe will turn green. Repeat this process up to two more times. </li>
+                <li> The Detector selects what she believes is the location of the tunnel.
+                    When she is done, she clicks on the "Ready to submit final guess" button. </li>
+            </ol>
+            <p>If the Detector correctly detected the tunnel, her score is (intersection probes + edge probes) she used. If she incorrectly detected the tunnel, then she gets a score of infinity. Now the two players reverse roles. The winner is the player with the lowest score. </p>
+        </div>
+    </div>
+    <div id = "infoPanel">
+        <button class="large ui green basic button" v-on:click="gotoBegin()">Start from beginning</button>
+        <div id = "basicInfoTwoPlayer" v-if="showBasicInfoPvP()">
+            <h2> P1 Score: {{scoreTwo}} P2 Score:{{scoreOne}} (smaller is better) </h2>
+            <h2> It's {{gameStatus}} now </h2>
+        </div>
+
+        <div id = "basicInfoAI" v-if="showBasicInfoAI()">
+            <h2> Your Score:{{scoreTwo}} (smaller is better) </h2>
+            <h2> It's {{gameStatus}} now </h2>
+        </div>
+
+        <div class="configureTool" v-if="showModeSelect()">
+            <select class="ui search dropdown" v-model="mode">
+                <option>AI</option>
+                <option>PvP</option>
+            </select>
+
+            <select class="ui search dropdown" v-model="size">
+                <option v-for="sizeReal in sizes" v-bind:value="sizeReal">
+                    {{ sizeReal }}
+                </option>
+            </select>
+
+            <select class="ui search dropdown" v-model="difficulty">
+                <option>Easy</option>
+                <option>Normal</option>
+            </select>
+
+            <button class="large ui blue basic button" v-on:click="startGame()">Start Game! </button>
+        </div>
+
+        <div v-if="showBetweenGameInfo()">
+            <button class="large ui violet basic button" v-on:click="revealBoard()">{{reveal}}</button>
+            <button class="large ui olive basic button" v-on:click="startNextRound()">Start Next Round</button>
+            <div class="startSameGame">
+                <select class="ui search dropdown" v-model="difficulty">
+                    <option>Easy</option>
+                    <option>Normal</option>
+                </select>
+                <button class="large ui pink basic button" v-on:click="startSameGame()">Start a new single game with this tunnel</button>
+            </div>
+        </div>
+
+        <div v-if="showSaveButton()">
+            <h2>Winner is {{getWinner()}}</h2>
+            <div class="ui action input">
+                <input type="text" placeholder="Enter Your Name.." v-model="winnerName">
+                <button  class="large ui green basic button" id="score" v-on:click="saveScore()">Save Score</button>
+            </div>
+            <button class="large ui violet basic button" v-on:click="revealBoard()">{{reveal}}</button>
+            <div class="startSameGame">
+                <select class="ui search dropdown" v-model="difficulty">
+                    <option>Easy</option>
+                    <option>Normal</option>
+                </select>
+                <button class="large ui pink basic button" v-on:click="startSameGame()">Start a new single game with this tunnel</button>
+            </div>
+        </div>
+
+        <div id="tunnelInfo">
+            <transition name="fade">
+                <div id="edgeInfo" v-if="showEdgeInfo()">
+                    <h2>Max edges: {{maxEdge()}} Edges left: {{edgeLeft()}} Isvalid: {{isValid()}}</h2>
+                    <button class="large ui blue basic button" v-on:click="gotoDetect()">I finished my tunnel</button>
+                    <button class="large ui red basic button" v-on:click="clearBoard()">Clear and start again</button>
+                </div>
+            </transition>
+
+        </div>
+
+        <div class="guessInfo">
+            <transition name="fade">
+                <div id="guessInfo" v-if="showGuessInfo()">
+                    <h2>Guess round {{guessRound}} of 3</h2>
+                    <button class="large ui basic green button" v-on:click="finishPrepare()">Finish this Round</button>
+                </div>
+            </transition>
+
+            <transition name="fade">
+                <div id="finishGuess" v-if="showFinishGuessInfo()">
+                    <button class="large ui basic green button" v-on:click="finishGuess()">Finish Guess</button>
+                </div>
+            </transition>
+        </div>
+    </div>
+
+    <div id="gridWrapper">
+        <template v-for = "m in size + 1" >
+            <div class = hedgeWrapper>
+                <template v-for="n in size + 1">
+                    <div v-bind:class="nodes[m-1][n-1].class" v-on:click="nodeClick(nodes[m-1][n-1])"></div>
+                    <div v-if="n < size + 1" v-bind:class="hedges[m-1][n-1].class"  v-on:click="edgeClick(hedges[m-1][n-1])"></div>
+                </template>
+            </div>
+            <div v-if="m < size + 1" >
+                <div id="vedges" v-for="n in size + 1" class = vedgeWrapper>
+                    <div v-bind:class="vedges[m-1][n-1].class" v-on:click="edgeClick(vedges[m-1][n-1])"></div>
+                    <div v-if="n < size + 1" class="left"></div>
+                </div>
+            </div>
+        </template>
+    </div>
+</div>
+
+<script type="text/javascript" src="assets/js/bundle.js" charset="utf-8"></script>
+</body>
+

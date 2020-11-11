@@ -1,0 +1,47 @@
+body {
+	background: rgba(0,0,0,.05);
+}
+
+.container-fluid {
+	margin-top: 1%;
+}
+
+.information {
+	background: rgba(0,0,0, .1);
+	border-radius: 10px;
+}
+
+.information-header {
+	margin-bottom: 10%;
+}
+
+#error-container {
+	margin-top: 5%;
+	margin-bottom: 0;
+	border-radius: 10px;
+	display: none;
+}
+
+.game-title {
+	text-align: center;
+}
+
+input.info-input.form-control {
+	border-radius: 10px;
+}
+
+button.start-game {
+	float: right;
+	margin: 5% 0;
+	border-radius: 10px;
+	border: 1px solid rgba(0,0,0,.3);
+}
+
+button.submit-move {
+	position: relative;
+	z-index: 999;
+}
+
+.btn-container {
+	overflow: auto;
+}
