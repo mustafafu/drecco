@@ -5,7 +5,7 @@ include dirname(__FILE__).'/globalcon.php';
 include dirname(__FILE__).'/../dbconf.php';
 
 //Set this for global site use
-$site_name = 'drecco2016';
+$site_name = 'drecco2020';
 
 //Maximum Login Attempts
 $max_attempts = 5;
@@ -17,15 +17,15 @@ $admin_email = '';
 
 //EMAIL SETTINGS
 //SEND TEST EMAILS THROUGH FORM TO https://www.mail-tester.com GENERATED ADDRESS FOR SPAM SCORE
-$from_email = 'by653@cims.nyu.edu'; //Webmaster email
+$from_email = ''; //Webmaster email
 $from_name = 'admin'; //"From name" displayed on email
 
 //Find specific server settings at https://www.arclab.com/en/kb/email/list-of-smtp-and-pop3-servers-mailserver-list.html
 $mailServerType = 'smtp';
 //IF $mailServerType = 'smtp'
-$smtp_server = 'smtp.cims.nyu.edu';
-$smtp_user = 'by653@cims.nyu.edu';
-$smtp_pw = 'aptx4869@';
+$smtp_server = '';
+$smtp_user = '';
+$smtp_pw = '';
 $smtp_port = 25; //465 for ssl, 587 for tls, 25 for other
 $smtp_security = '';//ssl, tls or ''
 

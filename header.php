@@ -3,7 +3,6 @@ session_start();
 ?>
 <html>
 <head>
-<!--    <base href="http://cims.nyu.edu/~by653/hps/">-->
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
 </head>
 <body>

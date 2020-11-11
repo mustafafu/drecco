@@ -8,7 +8,7 @@ if (isset($_SESSION['username'])) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <base href="http://cims.nyu.edu/~by653/hps/">
+      <base href="http://cims.nyu.edu/~mfo254/drecco/">
     <meta charset="utf-8">
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

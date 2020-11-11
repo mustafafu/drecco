@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var root = "/~by653/hps/";
+    var root = "/~mfo254/drecco/";
     console.log(root);
     "use strict";
     $("#submit").click(function () {
