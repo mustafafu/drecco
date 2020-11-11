@@ -12,6 +12,12 @@ You can see the current games in /games/ and use them for interface etc.
 ## Development Process
 I think the best way to go about this is to build your own copy of Dr.Ecco website, following this guide. Then develop your game using your copy, test it play it etc.
 
+### Setting up the database:
+* Go to [CIMS guide](https://cims.nyu.edu/webapps/content/systems/userservices/databases) and follow instructions there and create a database.
+  * create database called drecco, and your net id will be prepend as mfo254_drecco.
+
+### Changing the required parts to update the database.
+
 
 
 ## Updatind the Dr.Ecco page
