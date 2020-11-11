@@ -3,7 +3,7 @@
 All games that need to be uploaded on the website must implement the following
 items:
 
-1. The game must be submitted as a zip file, which unzips into a separate directory. (I will provide the script to unzip and add your game to the database, more on that in [Development Process](https://github.com/mustafafu/DrEcco/blob/main/README.md#development-process).)
+1. The game must be submitted as a zip file, which unzips into a separate directory. (I will provide the script to unzip and add your game to the database, more on that in [Development Process](https://github.com/mustafafu/DrEcco#development-process).)
 2. The main entry point to the game must be index.php. The CIMS server only runs PHP scripts, so your game's main page will have to be in PHP. From there, you can probably run the game via Javascript. (See the examples in /games/)
 
 I have copied the current server and games over to this github repository. If you want to take a look at the code. I can also provide you a zip of the whole thing over email if you want. (mfo254 [at] nyu.edu )
