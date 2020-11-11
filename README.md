@@ -16,7 +16,22 @@ I think the best way to go about this is to build your own copy of Dr.Ecco websi
 * Go to [CIMS guide](https://cims.nyu.edu/webapps/content/systems/userservices/databases) and follow instructions there and create a database.
   * create database called drecco, and your net id will be prepend as mfo254_drecco.
 
-### Changing the required parts to update the database.
+### Changing the required parts to run your web page and connect to database.
+You need to change the base url according to your netid.
+| File Path  | Lines to Change |
+| ------------- | ------------- |
+| ./index.php  | 4  |
+
+You need to change the following files according to your username/db configuration.
+| File Path  | Lines to Change |
+| ------------- | ------------- |
+| ./games/add_game.py  | 12,13,14  |
+| ./games/p3_add_game.py  | 40,41,42  |
+| ./dbconf.php  | 7,8,9  |
+| ./create_tables.py  | 10,11,12  |
+
+
+
 
 
 
