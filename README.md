@@ -1,2 +1,2 @@
-# DrEcco
-2020 Dr. Ecco
+# DrEcco (2020)
+
