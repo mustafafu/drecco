@@ -37,13 +37,43 @@ You need to change the following files according to your username/db configurati
 | ./dbconf.php  | 7,8,9  |
 | ./create_tables.py  | 10,11,12  |
 
-### Permissions to public access
-Make sure that all files are in ``rw-r--r--`` mode and all folders are in ``rwxr-xr-x`` mode at a minimum.
-chmod 755 drecco/
-chmod 755 *.php
-chmod -R 755 dbman images includes js css
-chmod 755 .
+### Transferring the webpage to your cims account
+Login to access.cims.nyu.edu
+```
+cd /web/$USER
+git clone https://github.com/mustafafu/drecco.git
+cd drecco/
+```
 
+### Creating Tables at the db
+After the folders are pulled from github edit the create_tables.py with your db credentials.
+Currently, you should have an empty db check https://cims.nyu.edu/phpMyAdmin/index.php .
+
+Run :
+```
+python create_tables.py
+```
+which will create tables " game, loginAttenmpts,members,saves,scores" at your db.
+
+### Updating folder and file permissions to public access
+Make sure that all **required** files are in ``rw-r--r--`` mode and all folders are in ``rwxr-xr-x`` mode at a minimum. Please refrain from chmod -R . as this will exose your db credentials. 
+```
+chmod 755 .
+chmod 755 -R css js images includes dbman
+chmod 755 games #(without -R argument)
+chmod 755 footer.php  getScore.php  header.php  index.php  info.php  leftMenuGame.php dbconf.php
+```
+
+### Adding a new game
+Once we are done with the permission, we can add a game now. Create a \*.zip folder with the same name as game name and game path. (Without spaces please)
+Go to ./games/ directory, edit the db credentials in p3_add_game.py script.
+
+Now simply use the script to unzip and add your game to db. After this the script will take care of the necessary permissions.
+```
+python3 p3_add_game.py -gn <your_game_name> -gp <your_game_folder> 
+```
+
+You should be able to see your game in your own webpage.
 
 
 ## Updatind the Dr.Ecco page
