@@ -22,6 +22,13 @@ You need to change the base url according to your netid.
 | ------------- | ------------- |
 | ./index.php  | 4  |
 
+|The rest is optional|Lines|
+| ------------- | ------------- |
+| ./dbman/main_login.php  |11  |
+| ./dbman/signup.php  | 13  |
+| ./dbman/verify_user.php  | 4  |
+| ./dbman/js/login.js  | 2  |
+
 You need to change the following files according to your username/db configuration.
 | File Path  | Lines to Change |
 | ------------- | ------------- |
