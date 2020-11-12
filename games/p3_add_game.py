@@ -37,7 +37,7 @@ def unzip(source_filename, dest_dir):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', type=str, default='warehouse.cims.nyu.edu', help="hostname of the MySQL server")
-    parser.add_argument('-d', type=str, default='mfo254_hps', help="name of the database")
+    parser.add_argument('-d', type=str, default='mfo254_drecco', help="name of the database")
     parser.add_argument('-u', type=str, default='mfo254', help="id of the database admin")
     parser.add_argument('-p', type=str, default='db_passwd', help="passwd of the database admin")
     parser.add_argument('-gn', type=str, help="name of the game")
