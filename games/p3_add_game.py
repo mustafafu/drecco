@@ -39,7 +39,7 @@ if __name__ == "__main__":
     parser.add_argument('-n', type=str, default='warehouse.cims.nyu.edu', help="hostname of the MySQL server")
     parser.add_argument('-d', type=str, default='mfo254_hps', help="name of the database")
     parser.add_argument('-u', type=str, default='mfo254', help="id of the database admin")
-    parser.add_argument('-p', type=str, default='xpska6uj', help="passwd of the database admin")
+    parser.add_argument('-p', type=str, default='db_passwd', help="passwd of the database admin")
     parser.add_argument('-gn', type=str, help="name of the game")
     parser.add_argument('-gp', type=str, help="folder name of the game")
     args = parser.parse_args()
