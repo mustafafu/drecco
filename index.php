@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="http://cims.nyu.edu/~mfo254/drecco">
+    <base href="http://cims.nyu.edu/~mfo254/drecco/">
     <script src="js/jquery-2.2.4.min.js"></script>
     <script src="js/facebox.js"></script>
     <link rel="stylesheet" type="text/css" href="css/facebox.css"/>
