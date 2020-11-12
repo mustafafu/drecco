@@ -37,7 +37,9 @@ You need to change the following files according to your username/db configurati
 | ./dbconf.php  | 7,8,9  |
 | ./create_tables.py  | 10,11,12  |
 
-
+### Permissions to public access
+Make sure that all files are in ``rw-r--r--`` mode and all folders are in ``rwxr-xr-x`` mode at a minimum.
+chmod 755 drecco/
 
 
 
