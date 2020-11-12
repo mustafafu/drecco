@@ -5,7 +5,7 @@ $host = "warehouse.cims.nyu.edu"; // Host name
 //$password = "adba2"; // Mysql password
 //$db_name = "by653_adba2"; // Database name
 $username = "mfo254";
-$password = "xpska6uj";
+$password = "db_pswd";
 $db_name = "mfo254_drecco";
 
 
