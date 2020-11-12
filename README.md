@@ -40,7 +40,9 @@ You need to change the following files according to your username/db configurati
 ### Permissions to public access
 Make sure that all files are in ``rw-r--r--`` mode and all folders are in ``rwxr-xr-x`` mode at a minimum.
 chmod 755 drecco/
-
+chmod 755 *.php
+chmod -R 755 dbman images includes js css
+chmod 755 .
 
 
 
