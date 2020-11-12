@@ -73,8 +73,8 @@ Now simply use the script to unzip and add your game to db. After this the scrip
 python3 p3_add_game.py -gn <your_game_name> -gp <your_game_folder> 
 ```
 
-You should be able to see your game in your own webpage.
+You should be able to see your game in your own copy of [Dr.Ecco](https://cims.nyu.edu/~mfo254/drecco/)
 
 
 ## Updatind the Dr.Ecco page
-After you are done with developing the game, you can send me \*.zip of your game folder which will unzip to a folder with **same name** (*without space* is preferred :smile: ). I will take care of the rest. I will host the game on my copy of [Dr.Ecco](https://cims.nyu.edu/~mfo254/hps/), make sure everything is good to go and finally update the real [Dr.Ecco](https://cims.nyu.edu/drecco2016/).
+After you are done with developing the game, you can send me \*.zip of your game folder which will unzip to a folder with **same name** (*without space* is preferred :smile: ). I will take care of the rest. I will host the game on my copy of [Dr.Ecco](https://cims.nyu.edu/~mfo254/drecco/), make sure everything is good to go and finally update the real [Dr.Ecco](https://cims.nyu.edu/drecco2016/).
