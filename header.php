@@ -8,7 +8,7 @@ session_start();
 <body>
 
 <header>
-   <h1>DR. ECCO 2020</h1>
+   <h1>DR. ECCO 2021</h1>
    <h4><?php
        if (!isset($_SESSION['username'])) {
            echo "<a href='dbman/main_login.php' rel='facebox'>Login</a>";
