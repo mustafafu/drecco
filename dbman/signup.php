@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <base href="http://cims.nyu.edu/~mfo254/drecco">
+      <base href="http://cims.nyu.edu/~as9913/drecco">
 	<meta charset="utf-8">
 	<title>Signup</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
